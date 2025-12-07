@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+<!-- ¡Tu Entrada! -->
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boleto SafeTix</title>
 <style>
     body {
+        flex-direction: column;
+        align-items: center;
         background: #eef2f7;
         font-family: "Inter", sans-serif;
         padding: 30px;
@@ -134,9 +138,14 @@
         50% { transform: scale(1.05); filter: brightness(1.3); }
         100% { transform: scale(1); filter: brightness(1); }
     }
+50% {transform: scaleX(1.08);}100% {transform: scaleX(1);}}
+@keyframes shimmer {0% {background-position: 0 0;}100% {background-position: 200% 0;}}
+@keyframes swipe {0% {transform:scaleX(0);}100% {transform:scaleX(1);}}@keyframes shimmer {0% {background-position:0 0;}100% {background-position:200% 0;}}
 </style>
 </head>
-<body>
+<body style="text-align:center;">
+
+<h1 style="font-family:'Inter',sans-serif; font-size:22px; font-weight:700; text-align:center; margin:16px 0; color:#2563eb;">¡Tu Entrada!<br><div class="titulo-linea" style='width:100%;height:2px;background:linear-gradient(90deg,#2563eb 0%,#93c5fd 50%,#2563eb 100%);border-radius:8px;transform:scaleX(0);transform-origin:left;animation:swipe 0.8s ease-out forwards, shimmer 1.8s infinite linear;'></div></h1>
 <div class="ticket-card">
     <div class="banner" style="background-image:url('https://i.imgur.com/g2mDjyC.jpeg');"></div>
     <div class="safetix-label-top">TICKETMASTER SAFETIX™</div>
@@ -150,7 +159,6 @@
     <div class="safetix-warning">SafeTix™</div>
     <div class="no-screenshot">No se permite ingresar con Captura de pantalla</div>
 
-    <!-- LEYENDA INFORMATIVA -->
     <div style="font-size:11px; color:#374151; margin-top:15px; text-align:center; line-height:1.4; padding:0 10px;">
         <strong>Este Boleto es tu entrada, guárdalo en tu pantalla de inicio.</strong><br>
         Asegúrate de tener buena conexión a internet.<br>
@@ -182,4 +190,5 @@
 </script>
 </body>
 </html>
+
 
