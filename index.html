@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Código proporcionado por el usuario -->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boleto SafeTix</title>
+<title>Ticketmaster Boleto Digital</title>
 <style>
 /* Estilos originales incluidos tal cual */
     body {
@@ -18,7 +17,7 @@
     }
 
     .ticket-card {
-        width: 330px;
+        width: 300px;
         background: white;
         border-radius: 18px;
         overflow: hidden;
@@ -32,8 +31,7 @@
         box-shadow: 0px 14px 34px rgba(0,0,0,0.22);
     }
 
-    .banner {
-        height: 120px;
+    .banner { height: 80px;
         width: 100%;
         background-size: cover;
         background-position: center;
@@ -68,15 +66,12 @@
         margin-bottom: 14px;
     }
 
-    .qr-box {
-        position: relative;
-        width: 160px;
-        height: 160px;
+    .qr-box { position: relative; width: 150px; height: 150px;
         background: white;
         border-radius: 12px;
         border: 1px solid #d1d5db;
         padding: 12px;
-        margin: 0 auto 10px;
+        margin: 0 auto 12px;
         overflow: hidden;
         box-shadow: 0px 3px 10px rgba(0,0,0,0.12);
     }
@@ -93,26 +88,11 @@
         z-index: 3;
     }
 
-    .scan-bar {
-        position: absolute;
-        top: -40px;
-        left: 0;
-        width: 100%;
-        height: 30px;
-        background: rgba(59,130,246,0.35);
-        box-shadow: 0 0 12px rgba(59,130,246,0.8);
-        animation: scan 2s linear infinite;
-        z-index: 2;
-    }
+    .scan-bar { position:absolute; top:-40px; left:0; width:100%; height:30px; background:rgba(59,130,246,0.2); box-shadow:0 0 12px rgba(59,130,246,0.4); animation:scan 2s linear infinite; z-index:5; }
 
     @keyframes scan { 0% { top: -40px; } 100% { top: 170px; } }
 
-    #qr {
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        position: relative;
-    }
+    #qr { width: 100%; height: 100%; position: relative; z-index: 1; image-rendering: pixelated; image-rendering: pixelated; image-rendering: pixelated; }
 
     .safetix-warning {
         font-size: 11px;
@@ -175,17 +155,38 @@
 }
 
 </style>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/Eiwjdsh.png">
 </head>
 <body>
 
-
 <div class="ticket-card">
-    <div class="banner" style="background-image:url('https://i.imgur.com/g2mDjyC.jpeg');"></div>
-    <div class="safetix-label-top">TICKETMASTER SAFETIX™</div>
-    <div class="title">Bad Bunny — DeBí TiRAR MáS FOToS World Tour 2025</div>
-    <div class="subtitle">SEC NA-16 • FILA 15 • ASIENTO 12</div>
-    <div class="event-info">21 Dic 2025 20:00 | Estadio GNP Seguros · CDMX</div>
-    <div class="qr-box">
+    <div style="width:100%; text-align:left; margin-bottom:0;">
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; background:rgba(0,86,179,0.85); color:white; font-weight:600; font-size:16px; padding:7px 14px; border-radius:0; text-align:center; text-shadow:0 2px 6px rgba(0,0,0,0.85);">
+        <div style="width:100%; text-align:center; font-weight:700; font-size:15px; margin-bottom:8px;">Boleto normal</div>
+        <div style="display:flex; width:100%; justify-content:space-between; align-items:center; gap:10px; padding-left:0; justify-content:space-between; margin-top:10px;">
+<div style="text-align:center; width:25%; margin-left:0;">
+    <div style="font-size:14px; font-weight:500;">SECCION</div>
+    <div style="font-size:20px; font-weight:600;">NA-19</div>
+</div>
+<div style="text-align:center; width:20%; margin-left:0;">
+    <div style="font-size:14px; font-weight:500;">FILA</div>
+    <div style="font-size:20px; font-weight:600;">14</div>
+</div>
+<div style="text-align:center; width:30%; margin-right:20px;">
+    <div style="font-size:14px; font-weight:500;">ASIENTO</div>
+    <div style="font-size:20px; font-weight:600;">13</div>
+</div>
+</div>
+    </div>
+</div>
+<div class="banner" style="background-image:url('https://i.imgur.com/q60WbDs.jpeg'); position:relative; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding:8px 0 8px 0;">
+    <div style="color:white; font-weight:700; font-size:15px; text-shadow:0 2px 6px rgba(0,0,0,0.8); text-align:center; margin-bottom:4px;">Bad Bunny — DeBí TiRAR MáS FOToS World Tour 2025</div>
+        <div style="color:white; font-weight:500; font-size:13px; text-shadow:0 2px 8px rgba(0,0,0,0.95); text-align:center; ">16 Dic 2025 21:00 | Estadio GNP Seguros · CDMX</div>
+    </div>
+    <div class="safetix-label-top">BOLETO  DIGITAL</div>
+
+
+       <div class="qr-box">
         <div class="scan-bar"></div>
         <canvas id="qr"></canvas>
     </div>
@@ -206,7 +207,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 <script>
     const qrCanvas = document.getElementById("qr");
-    const qr = new QRious({ element: qrCanvas, size: 160, value: "SAFE-TIX-INIT" });
+    const qr = new QRious({ element: qrCanvas, size: 150, level: 'H', value: "SAFE-TIX-INIT" });
 
     async function generateToken() {
         const seed = "TM-" + Date.now() + "-" + Math.random();
@@ -261,6 +262,8 @@ Por seguridad, debes esperar <strong>72 horas</strong> antes de añadir un nuevo
     }, 10000);
 });
 </script>
+</body>
+</html>
 </body>
 </html>
 
