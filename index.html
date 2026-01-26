@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ticketmaster Boleto Digital</title>
 <style>
-/* Estilos originales incluidos tal cual */
     body {
         flex-direction: column;
         align-items: center;
@@ -31,10 +30,32 @@
         box-shadow: 0px 14px 34px rgba(0,0,0,0.22);
     }
 
-    .banner { height: 80px;
+    .banner {
+        height: 120px;
         width: 100%;
         background-size: cover;
         background-position: center;
+        position: relative;
+    }
+
+    /* Overlay degradado para mejorar legibilidad del texto */
+    .banner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to top,
+            rgba(0,0,0,0.65) 0%,
+            rgba(0,0,0,0.45) 35%,
+            rgba(0,0,0,0.15) 70%,
+            rgba(0,0,0,0.05) 100%
+        );
+        z-index: 0;
+    }
+
+    .banner > * {
+        position: relative;
+        z-index: 1;
     }
 
     .safetix-label-top {
@@ -66,7 +87,10 @@
         margin-bottom: 14px;
     }
 
-    .qr-box { position: relative; width: 150px; height: 150px;
+    .qr-box {
+        position: relative;
+        width: 150px;
+        height: 150px;
         background: white;
         border-radius: 12px;
         border: 1px solid #d1d5db;
@@ -88,11 +112,30 @@
         z-index: 3;
     }
 
-    .scan-bar { position:absolute; top:-40px; left:0; width:100%; height:30px; background:rgba(59,130,246,0.2); box-shadow:0 0 12px rgba(59,130,246,0.4); animation:scan 2s linear infinite; z-index:5; }
+    .scan-bar {
+        position:absolute;
+        top:-40px;
+        left:0;
+        width:100%;
+        height:30px;
+        background:rgba(59,130,246,0.2);
+        box-shadow:0 0 12px rgba(59,130,246,0.4);
+        animation:scan 2s linear infinite;
+        z-index:5;
+    }
 
-    @keyframes scan { 0% { top: -40px; } 100% { top: 170px; } }
+    @keyframes scan {
+        0% { top: -40px; }
+        100% { top: 170px; }
+    }
 
-    #qr { width: 100%; height: 100%; position: relative; z-index: 1; image-rendering: pixelated; image-rendering: pixelated; image-rendering: pixelated; }
+    #qr {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 1;
+        image-rendering: pixelated;
+    }
 
     .safetix-warning {
         font-size: 11px;
@@ -116,80 +159,80 @@
         100% { transform: scale(1); filter: brightness(1); }
     }
 
+    .glow-btn {
+        margin-top:15px;
+        padding:8px 14px;
+        border:none;
+        border-radius:8px;
+        background:#2563eb;
+        color:white;
+        font-size:13px;
+        font-weight:600;
+        cursor:pointer;
+        animation:pulseBtn 1.8s infinite ease-in-out;
+        position: relative;
+    }
 
-/* Animación de pulso para el botón */
-.glow-btn {
-    margin-top:15px;
-    padding:8px 14px;
-    border:none;
-    border-radius:8px;
-    background:#2563eb;
-    color:white;
-    font-size:13px;
-    font-weight:600;
-    cursor:pointer;
-    animation:pulseBtn 1.8s infinite ease-in-out;
-}
+    @keyframes pulseBtn {
+        0% { transform:scale(1); box-shadow:0 0 0 0 rgba(37,99,235,0.6); }
+        50% { transform:scale(1.06); box-shadow:0 0 14px 6px rgba(37,99,235,0.35); }
+        100% { transform:scale(1); box-shadow:0 0 0 0 rgba(37,99,235,0.6); }
+    }
 
-@keyframes pulseBtn {
-    0% { transform:scale(1); box-shadow:0 0 0 0 rgba(37,99,235,0.6); }
-    50% { transform:scale(1.06); box-shadow:0 0 14px 6px rgba(37,99,235,0.35); }
-    100% { transform:scale(1); box-shadow:0 0 0 0 rgba(37,99,235,0.6); }
-}
+    .glow-btn::after {
+        content:"";
+        position:absolute;
+        top:0;
+        left:-100%;
+        width:100%;
+        height:100%;
+        background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+        animation:shine 4.5s infinite;
+    }
 
-.glow-btn::after {
-    content:"";
-    position:absolute;
-    top:0;
-    left:-100%;
-    width:100%;
-    height:100%;
-    background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
-    animation:shine 4.5s infinite;
-}
-
-@keyframes shine {
-    0% { left:-100%; }
-    60% { left:100%; }
-    100% { left:100%; }
-}
-
+    @keyframes shine {
+        0% { left:-100%; }
+        60% { left:100%; }
+        100% { left:100%; }
+    }
 </style>
-    <link rel="icon" type="image/png" href="https://i.imgur.com/Eiwjdsh.png">
+<link rel="icon" type="image/png" href="https://i.imgur.com/Eiwjdsh.png">
 </head>
 <body>
 
 <div class="ticket-card">
     <div style="width:100%; text-align:left; margin-bottom:0;">
-    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; background:rgba(0,86,179,0.85); color:white; font-weight:600; font-size:16px; padding:7px 14px; border-radius:0; text-align:center; text-shadow:0 2px 6px rgba(0,0,0,0.85);">
-        <div style="width:100%; text-align:center; font-weight:700; font-size:15px; margin-bottom:8px;">Boleto normal</div>
-        <div style="display:flex; width:100%; justify-content:space-between; align-items:center; gap:10px; padding-left:0; justify-content:space-between; margin-top:10px;">
-<div style="text-align:center; width:25%; margin-left:0;">
-    <div style="font-size:14px; font-weight:500;">SECCION</div>
-    <div style="font-size:16px; font-weight:600;">GRAL-B</div>
-</div>
-<div style="text-align:center; width:20%; margin-left:0;">
-    <div style="font-size:14px; font-weight:500;">FILA</div>
-    <div style="font-size:16px; font-weight:600;">G8</div>
-</div>
-<div style="text-align:center; width:30%; margin-right:20px;">
-    <div style="font-size:14px; font-weight:500;">ASIENTO</div>
-    <div style="font-size:20px; font-weight:600;">-</div>
-</div>
-</div>
+        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; background:rgba(0,86,179,0.85); color:white; font-weight:600; font-size:16px; padding:7px 14px; text-align:center; text-shadow:0 2px 6px rgba(0,0,0,0.85);">
+            <div style="width:100%; text-align:center; font-weight:700; font-size:15px; margin-bottom:8px;">CORTESÍA CITIBANAMEX</div>
+            <div style="display:flex; width:100%; justify-content:space-between; align-items:center; gap:10px; margin-top:10px;">
+                <div style="text-align:center; width:25%;">
+                    <div style="font-size:16px; font-weight:500;">SECCION</div>
+                    <div style="font-size:16px; font-weight:600;">NA-16A</div>
+                </div>
+                <div style="text-align:center; width:20%;">
+                    <div style="font-size:16px; font-weight:500;">FILA</div>
+                    <div style="font-size:16px; font-weight:600;">8</div>
+                </div>
+                <div style="text-align:center; width:30%; margin-right:20px;">
+                    <div style="font-size:16px; font-weight:500;">ASIENTO</div>
+                    <div style="font-size:16px; font-weight:600;">9</div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<div class="banner" style="background-image:url('https://i.imgur.com/q60WbDs.jpeg'); position:relative; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding:8px 0 8px 0;">
-    <div style="color:white; font-weight:700; font-size:15px; text-shadow:0 2px 6px rgba(0,0,0,0.8); text-align:center; margin-bottom:4px;">Bad Bunny — DeBí TiRAR MáS FOToS World Tour 2025</div>
-        <div style="color:white; font-weight:500; font-size:13px; text-shadow:0 2px 8px rgba(0,0,0,0.95); text-align:center; ">21 Dic 2025 20:00 | Estadio GNP Seguros · CDMX</div>
+
+    <div class="banner" style="background-image:url('https://i.imgur.com/HzjjCaa.jpeg'); position:relative; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding:8px 0;">
+        <div style="color:white; font-weight:700; font-size:17px; text-shadow:0 2px 6px rgba(0,0,0,0.8); text-align:center; margin-bottom:4px;">BTS WORLD TOUR 'ARIRANG' IN MEXICO CITY</div>
+        <div style="color:white; font-weight:500; font-size:11px; text-shadow:0 2px 8px rgba(0,0,0,0.95); text-align:center;">sab, 09 de mayo de 2026 20:00 | Estadio GNP Seguros</div>
     </div>
-    <div class="safetix-label-top">BOLETO  DIGITAL</div>
 
+    <div class="safetix-label-top">BOLETO DIGITAL</div>
 
-       <div class="qr-box">
+    <div class="qr-box">
         <div class="scan-bar"></div>
         <canvas id="qr"></canvas>
     </div>
+
     <div class="safetix-warning">SafeTix™</div>
     <div class="no-screenshot">No se permite ingresar con Captura de pantalla</div>
 
@@ -199,9 +242,7 @@
         Siempre puedes volver a visualizar este boleto escaneando el código QR enviado a tu correo electrónico.
     </div>
 
-    <!-- Botón para añadir a URL -->
     <button id="addButton" class="glow-btn">Añadir a Ticketmaster</button>
-
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
@@ -227,40 +268,35 @@
     updateQR();
     setInterval(updateQR, 5000);
 
-// Acción del botón Añadir a URL
-const addBtn = document.getElementById('addButton');
-addBtn.addEventListener('click', () => {
-    // Crear modal superpuesto
-    const modal = document.createElement('div');
-    modal.style.position = 'fixed';
-    modal.style.top = '0';
-    modal.style.left = '0';
-    modal.style.width = '100%';
-    modal.style.height = '100%';
-    modal.style.background = 'rgba(0,0,0,0.55)';
-    modal.style.display = 'flex';
-    modal.style.justifyContent = 'center';
-    modal.style.alignItems = 'center';
-    modal.style.zIndex = '9999';
+    const addBtn = document.getElementById('addButton');
+    addBtn.addEventListener('click', () => {
+        const modal = document.createElement('div');
+        modal.style.position = 'fixed';
+        modal.style.top = '0';
+        modal.style.left = '0';
+        modal.style.width = '100%';
+        modal.style.height = '100%';
+        modal.style.background = 'rgba(0,0,0,0.55)';
+        modal.style.display = 'flex';
+        modal.style.justifyContent = 'center';
+        modal.style.alignItems = 'center';
+        modal.style.zIndex = '9999';
 
-    modal.innerHTML = `
-        <div style="background:white;width:330px;border-radius:12px;padding:25px;text-align:center;font-family:Inter;box-shadow:0 8px 30px rgba(0,0,0,0.25);border-top:4px solid #0072ce;">
-            <img src='https://i.imgur.com/1ZppPzU.png' style='width:150px;margin-bottom:20px;opacity:0.9;'>
-            <h2 style='font-size:20px;font-weight:700;color:#1a1a1a;'>Error al añadir boleto</h2>
-            <p style='font-size:14px;color:#444;margin-top:10px;'>Debido a los recientes acontecimientos derivado de fraudes con la transferencia de Boletos. 
-Por seguridad, debes esperar <strong>72 horas</strong> antes de añadir un nuevo boleto aceptado.</p>
-            <div style='margin-top:15px;font-size:13px;color:#777;'>Código de error: <strong>TM-403-WAIT72H</strong></div>
-            <p style='font-size:12px;color:#666;margin-top:20px;'>Serás redirigido automáticamente...</p>
-        </div>
-    `;
+     modal.innerHTML = `
+            <div style="background:white;width:330px;border-radius:12px;padding:25px;text-align:center;font-family:Inter;box-shadow:0 8px 30px rgba(0,0,0,0.25);border-top:4px solid #0072ce;">
+                <h2 style="font-size:20px;font-weight:700;color:#1a1a1a;">Error al añadir boleto</h2>
+                <p style="font-size:14px;color:#444;margin-top:10px;">Este Boleto es una Cortesía, es para un solo Uso, por seguridad y evitar reventas no se permite añadir a Ticketmaster, Puedes Seguir usando tu boleto digital sin problema, gracias por confiar en Ticketmaster.</p>
+                <div style="margin-top:15px;font-size:13px;color:#777;">Código de error: <strong>TM-403-WAIT72H</strong></div>
+                <p style="font-size:12px;color:#666;margin-top:20px;">Serás redirigido automáticamente...</p>
+            </div>
+        `;
 
-    document.body.appendChild(modal);
+        document.body.appendChild(modal);
 
-    // Redirigir automáticamente después de 7 segundos
-    setTimeout(() => {
-        window.location.href = 'https://www.ticketmaster.com.mx/bad-bunny-boletos/artist/2317395';
-    }, 10000);
-});
+        setTimeout(() => {
+            window.location.href = 'https://www.ticketmaster.com.mx/bts-boletos/artist/2110227';
+        }, 15000);
+    });
 </script>
 </body>
 </html>
